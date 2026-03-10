@@ -1,0 +1,79 @@
+# CI/CD 통합 테스트 - 2025-01-26
+[project]
+name = "14-team-dojangkok-ai"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    # === FastAPI 서버 핵심 ===
+    "fastapi==0.110.0",
+    "uvicorn[standard]==0.29.0",
+    "httpx>=0.25.0",
+    "pydantic==2.8.0",
+    "python-dotenv==1.0.1",
+    "python-multipart==0.0.9",
+    # === LangGraph/LangChain ===
+    "langgraph==0.1.15",
+    "langchain==0.2.17",
+    "langchain-core==0.2.43",
+    "langchain-openai==0.1.25",
+    # === RAG/문서처리 ===
+    "chromadb==0.5.3",
+    "fastembed>=0.3.6",
+    "langchain-chroma==0.1.4",
+    "langchain-community==0.2.17",
+    "langchain-text-splitters==0.2.4",
+    "pymupdf==1.24.9",
+    "pypdf==4.2.0",
+    "beautifulsoup4==4.14.3",
+    "lxml==6.0.2",
+    "tiktoken==0.7.0",
+    # === 기타 ===
+    "numpy==1.26.4",
+    "redis==5.0.8",
+    "requests==2.32.5",
+    "google-cloud-storage==2.18.2",
+    # === Observability ===
+    "prometheus-fastapi-instrumentator>=7.0.0",
+    "python-json-logger>=2.0.0",
+    # === 제거됨 (vLLM 서버에서 별도 설치) ===
+    # accelerate, bitsandbytes, datasets, evaluate,
+    # huggingface-hub, peft, safetensors, torch,
+    # transformers, trl, vllm
+    "aiolimiter>=1.2.1",
+    "aio-pika>=9.6.1",
+]
+
+[dependency-groups]
+dev = [
+    "ruff==0.6.9",
+]
+
+[tool.ruff]
+target-version = "py310"
+line-length = 100
+exclude = [
+  ".git",
+  ".github",
+  ".venv",
+  "venv",
+  "__pycache__",
+  ".pytest_cache",
+  ".ruff_cache",
+  "dist",
+  "build",
+]
+
+[tool.ruff.lint]
+select = ["E","W","F","I","B","C4","UP"]
+ignore = ["E501","B008"]
+
+[tool.ruff.lint.isort]
+known-first-party = ["app"]
+
+[tool.ruff.format]
+quote-style = "double"
+indent-style = "space"
+skip-magic-trailing-comma = false
+line-ending = "auto"
